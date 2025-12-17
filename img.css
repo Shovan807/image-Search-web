@@ -1,0 +1,225 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* ===== BODY WITH ANIMATED BACKGROUND ===== */
+body {
+    min-height: 100vh;
+    color: #ffffff;
+
+    background: linear-gradient(
+        -45deg,
+        #0f2027,
+        #203a43,
+        #2c5364,
+        #1b1f3b
+    );
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    overflow-x: hidden;
+}
+
+/* Background animation */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== FLOATING GLOW EFFECT ===== */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: floatGlow 18s infinite alternate ease-in-out;
+    z-index: -1;
+}
+
+body::after {
+    width: 300px;
+    height: 300px;
+    top: 60%;
+    left: 60%;
+    animation-duration: 25s;
+}
+
+@keyframes floatGlow {
+    from { transform: translate(-50px, -50px); }
+    to { transform: translate(50px, 50px); }
+}
+
+/* ===== H1 ANIMATION ===== */
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: linear-gradient(
+        90deg,
+        #ff9f1c,
+        #ffbf69,
+        #ffffff,
+        #ff9f1c
+    );
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: textGlow 4s ease-in-out infinite, floatText 3s ease-in-out infinite;
+}
+
+/* Gradient glow animation */
+@keyframes textGlow {
+    0% { background-position: 0%; }
+    50% { background-position: 100%; }
+    100% { background-position: 0%; }
+}
+
+/* Floating effect */
+@keyframes floatText {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* ===== FORM (GLASS EFFECT) ===== */
+form {
+    width: 90%;
+    max-width: 600px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    padding: 20px;
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(14px);
+
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+}
+
+/* ===== SEARCH INPUT ===== */
+#search-box {
+    width: 350px;
+    padding: 13px 20px;
+    font-size: 18px;
+
+    border: none;
+    border-radius: 30px;
+    outline: none;
+
+    background: rgba(255,255,255,0.95);
+    color: #222;
+
+    transition: all 0.3s ease;
+}
+
+#search-box:focus {
+    box-shadow: 0 0 18px rgba(255,255,255,0.7);
+}
+
+/* ===== BUTTONS ===== */
+form button,
+#show-more {
+    height: 40px;
+    width: 90px;
+
+    border: none;
+    border-radius: 8px;
+
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+form button {
+    background: linear-gradient(135deg, #ff9f1c, #ffbf69);
+}
+
+#show-more {
+    margin-top: 20px;
+    display: none;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+form button:hover,
+#show-more:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+}
+
+/* ===== SEARCH RESULTS GRID ===== */
+#search-result {
+    width: 80%;
+    margin: 40px auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* ===== IMAGE CARDS ===== */
+#search-result img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+
+    border-radius: 14px;
+    cursor: pointer;
+
+    box-shadow: 0 15px 30px rgba(0,0,0,0.35);
+    transition: all 0.35s ease;
+}
+
+#search-result img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.5);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    #search-result {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #search-box {
+        width: 250px;
+    }
+}
+
+@media (max-width: 500px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    #search-box {
+        width: 100%;
+    }
+
+    #search-result {
+        grid-template-columns: 1fr;
+    }
+}
